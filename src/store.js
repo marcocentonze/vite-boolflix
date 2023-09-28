@@ -3,7 +3,7 @@ import { reactive } from "vue";
 import axios from "axios";
 
 export const store = reactive({
-    base_url: 'https://api.themoviedb.org/3/search/multi?api_key=d7e5bf42a15a20ec8d10fa9ee57b36fe&include_adult=false&language=it-IT&page=1&media_type=movie',
+    base_url: 'https://api.themoviedb.org/3/search/multi?api_key=44efb7bd1d6fe5c8077f10817ac9811f&include_adult=false&language=it-IT&page=1&media_type=movie',
     movies: null,
   
     connectionAPI(){
