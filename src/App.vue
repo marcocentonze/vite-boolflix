@@ -1,16 +1,27 @@
 <script>
+import { store } from './store.js';
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
+    data(){
+        return{
+         store,
+         movieSearch:''
+        }
+    },
     name: 'App',
     components: {
         HelloWorld
     },
-    data() {
-        return {
-
-        };
+    searchResult(){
+      store.base_url = store.base_url + `&query=${this.movieSearch}`
+      store.connectionAPI();
+      this.movieSearch = '';
     },
+    created() {
+    store.connectionAPI();
+    //console.log(store.connectionAPI);
+  }
 };
 
 
@@ -24,8 +35,8 @@ export default {
 <template>
     <HelloWorld />
     <div class="text-center">
-        <input type="text" placeholder="Cerca il tuo film...">
-        <button>Cerca</button>
+        <input type="text" placeholder="Cerca il tuo film..." v-model="movieSearch" @keyup.enter="searchResult()"> 
+        <button @click="searchResult()">Cerca</button>
     </div>
 </template>
 
