@@ -7,6 +7,14 @@ export default {
         return {
             store,
             movieSearch: '',
+            //oggetto che racchiude le lingue(non più di 4)
+            languageFlags: {
+                it: '<img src="https://flagsapi.com/IT/flat/16.png">',
+                fr: '<img src="https://flagsapi.com/FR/flat/16.png">',
+                de: '<img src="https://flagsapi.com/DE/flat/16.png">',
+                en: '<img src="https://flagsapi.com/EN/flat/16.png">',
+
+            },
         }
     },
     components: {
@@ -42,6 +50,7 @@ export default {
         <button type="submit" @click="searchResult()">Cerca</button>
     </div>
 
+
     <main class="bg-container">
         <!-- results -->
         <div class="container mt-4">
@@ -50,9 +59,16 @@ export default {
                     <ul class="list-group">
                         <li class="list-group-item bg-color-card">TITOLO: {{ movie.title }}</li>
                         <li class="list-group-item bg-color-card">TITOLO ORIGINALE: {{ movie.original_title }}</li>
-                        <li class="list-group-item bg-color-card">LINGUA: {{ movie.original_language }}</li>
+                        <li class="list-group-item bg-color-card">LINGUA: <span
+                                v-if="languageFlags[movie.original_language]">
+                                <img :src="languageFlags[movie.original_language]" alt="Flag">
+                            </span>
+                            <span v-else>
+                                Lingua sconosciuta
+                            </span>
+                        </li>
                         <li class="list-group-item bg-color-card">VOTO: {{ movie.vote_average }}</li>
-                        <li class="list-group-item bg-color-card">TIPO DI CONTENUTO: {{ movie.media_type }}</li>
+
                     </ul>
                 </div>
             </div>
