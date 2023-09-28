@@ -8,7 +8,7 @@ export default {
     },
     data() {
         return {
-            
+
         };
     },
 };
@@ -22,11 +22,11 @@ export default {
 </script>
 
 <template>
-  
-
-  <HelloWorld/>
+    <HelloWorld />
+    <div class="text-center">
+        <input type="text" placeholder="Cerca il tuo film...">
+        <button>Cerca</button>
+    </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
