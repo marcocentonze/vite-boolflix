@@ -9,10 +9,10 @@ export default {
             movieSearch: '',
             //oggetto che racchiude le lingue(non più di 4)
             languageFlags: {
-                it: '<img src="https://flagsapi.com/IT/flat/16.png">',
-                fr: '<img src="https://flagsapi.com/FR/flat/16.png">',
-                de: '<img src="https://flagsapi.com/DE/flat/16.png">',
-                en: '<img src="https://flagsapi.com/EN/flat/16.png">',
+                it: 'https://flagsapi.com/IT/flat/16.png',
+                fr: 'https://flagsapi.com/FR/flat/16.png',
+                de: 'https://flagsapi.com/DE/flat/16.png',
+                en: 'https://flagsapi.com/EN/flat/16.png',
 
             },
         }
