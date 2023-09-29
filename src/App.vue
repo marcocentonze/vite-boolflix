@@ -28,7 +28,7 @@ export default {
         },
     },
     created() {
-        store.connectionAPI();
+        store.connectionAPI();//chiama movies e serie tv perchè è multi
         //console.log(store.connectionAPI);
     }
 };
@@ -57,17 +57,42 @@ export default {
             <div class="row g-4">
                 <div class="col-md-4" v-for="movie in store.movies">
                     <ul class="list-group">
-                        <li class="list-group-item bg-color-card">TITOLO: {{ movie.title }}</li>
-                        <li class="list-group-item bg-color-card">TITOLO ORIGINALE: {{ movie.original_title }}</li>
-                        <li class="list-group-item bg-color-card">LINGUA: <span
+                        <li class="list-group-item bg-color-card" v-if="movie.media_type != 'person'">
+                            
+                            <span
+                             v-if="movie.media_type == 'movie'">TITOLO: {{ movie.title }}
+                            </span>
+                           
+                            <span v-if="movie.media_type == 'tv'">TITOLO: {{ movie.name }}
+                            
+                            </span>
+                        </li>
+                        
+                        <li class="list-group-item bg-color-card">
+                            <span
+                                v-if="movie.media_type == 'movie'">TITOLO ORIGINALE: {{ movie.original_title }}
+                            </span>
+
+                            <span
+                             v-if="movie.media_type == 'tv' || movie.media_type == 'person'">TITOLO ORIGINALE:
+                                {{ movie.original_name }}
+                            </span>
+                        </li>
+                       
+                        <li class="list-group-item bg-color-card" v-if="movie.media_type != 'person'">LINGUA:
+                             <span
                                 v-if="languageFlags[movie.original_language]">
                                 <img :src="languageFlags[movie.original_language]" alt="Flag">
                             </span>
+
                             <span v-else>
                                 Lingua sconosciuta
                             </span>
                         </li>
-                        <li class="list-group-item bg-color-card">VOTO: {{ movie.vote_average }}</li>
+                        
+                        <li class="list-group-item bg-color-card" v-if="movie.media_type != 'person'">
+                            VOTO: {{ movie.vote_average }}
+                        </li>
 
                     </ul>
                 </div>
@@ -86,3 +111,6 @@ export default {
     ;
 }
 </style>
+
+<!-- notes:
+I used multi search on themoviedb and "Use multi search when you want to search for movies, TV shows and people in a single request."- So i have to delete "people" from the search con IF -->
