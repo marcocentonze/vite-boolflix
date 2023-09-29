@@ -93,7 +93,10 @@ export default {
                         </li>
                         
                         <li class="list-group-item bg-color-card" v-if="movie.media_type != 'person'">
-                            VOTO: {{ movie.vote_average }}
+                            <span>VOTO:</span>
+                           <span v-for="star in 5">        <!---genero 5 stelle,condizione con match.ceil e solid(piena) o regular(vuota)-->
+                            <i :class="['fa', 'fa-star', 'text-warning', star <= Math.ceil(movie.vote_average / 2) ? 'fa-solid' : 'fa-regular']"></i>
+                           </span>
                         </li>
 
                     </ul>
