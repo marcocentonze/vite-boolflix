@@ -43,14 +43,23 @@ export default {
 
 <template>
     <HelloWorld />
-    <!-- input + button -->
-    <div class="text-center bg-container">
-        <h1 class="text-danger">Boolflix</h1>
-        <input type="search" placeholder="Cerca il tuo film..." v-model="movieSearch" @keyup.enter="searchResult()">
-        <button type="submit" @click="searchResult()">Cerca</button>
+    <!--------------------------------- NAVBAR -------------------------->
+    <div class="bg-container py-3 container-fluid">
+    <div class="row align-items-center">
+        <div class="col-md-3 text-md-start mb-3">
+            <img src="https://image.tmdb.org/t/p/w342/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" class="img-fluid" alt="Logo">
+        </div>
+        <div class="col-md-9 text-md-end">
+            <form class="d-flex">
+                <input type="search" class="form-control me-2" placeholder="Cerca i titoli di serie tv e film..." v-model="movieSearch" @keyup.enter="searchResult()">
+                <button type="submit" class="btn btn-primary" style="background-color: #E50914; border-color: #E50914;">Cerca</button>
+            </form>
+        </div>
     </div>
+</div>
 
 
+  <!-------------------------------------MAIN----------------------------->
     <main class="bg-container">
         <!-- results -->
         <div class="container mt-4">
@@ -58,32 +67,28 @@ export default {
                 <div class="col-md-4" v-for="movie in store.movies">
                     <ul class="list-group">
                         <!-- TO DO:creare classe a poster_path per stylizzarlo -->
-                        <img :src="'https://image.tmdb.org/t/p/original' + movie.poster_path">
+                        <img :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path">
                         <li class="list-group-item bg-color-card" v-if="movie.media_type != 'person'">
-                            
-                            <span
-                             v-if="movie.media_type == 'movie'">TITOLO: {{ movie.title }}
-                            </span>
-                           
-                            <span v-if="movie.media_type == 'tv'">TITOLO: {{ movie.name }}
-                            
-                            </span>
-                        </li>
-                        
-                        <li class="list-group-item bg-color-card">
-                            <span
-                                v-if="movie.media_type == 'movie'">TITOLO ORIGINALE: {{ movie.original_title }}
+
+                            <span v-if="movie.media_type == 'movie'">TITOLO: {{ movie.title }}
                             </span>
 
-                            <span
-                             v-if="movie.media_type == 'tv' || movie.media_type == 'person'">TITOLO ORIGINALE:
+                            <span v-if="movie.media_type == 'tv'">TITOLO: {{ movie.name }}
+
+                            </span>
+                        </li>
+
+                        <li class="list-group-item bg-color-card">
+                            <span v-if="movie.media_type == 'movie'">TITOLO ORIGINALE: {{ movie.original_title }}
+                            </span>
+
+                            <span v-if="movie.media_type == 'tv' || movie.media_type == 'person'">TITOLO ORIGINALE:
                                 {{ movie.original_name }}
                             </span>
                         </li>
-                       
+
                         <li class="list-group-item bg-color-card" v-if="movie.media_type != 'person'">LINGUA:
-                             <span
-                                v-if="languageFlags[movie.original_language]">
+                            <span v-if="languageFlags[movie.original_language]">
                                 <img :src="languageFlags[movie.original_language]" alt="Flag">
                             </span>
 
@@ -91,12 +96,14 @@ export default {
                                 Lingua sconosciuta
                             </span>
                         </li>
-                        
+
                         <li class="list-group-item bg-color-card" v-if="movie.media_type != 'person'">
                             <span>VOTO:</span>
-                           <span v-for="star in 5">        <!---genero 5 stelle,condizione con match.ceil e solid(piena) o regular(vuota)-->
-                            <i :class="['fa', 'fa-star', 'text-warning', star <= Math.ceil(movie.vote_average / 2) ? 'fa-solid' : 'fa-regular']"></i>
-                           </span>
+                            <span v-for="star in 5">
+                                <!---genero 5 stelle,condizione con match.ceil e solid(piena) o regular(vuota)-->
+                                <i
+                                    :class="['fa', 'fa-star', 'text-warning', star <= Math.ceil(movie.vote_average / 2) ? 'fa-solid' : 'fa-regular']"></i>
+                            </span>
                         </li>
 
                     </ul>
