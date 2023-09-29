@@ -57,6 +57,8 @@ export default {
             <div class="row g-4">
                 <div class="col-md-4" v-for="movie in store.movies">
                     <ul class="list-group">
+                        <!-- TO DO:creare classe a poster_path per stylizzarlo -->
+                        <img :src="'https://image.tmdb.org/t/p/original' + movie.poster_path">
                         <li class="list-group-item bg-color-card" v-if="movie.media_type != 'person'">
                             
                             <span
