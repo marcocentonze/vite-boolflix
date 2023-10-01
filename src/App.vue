@@ -44,72 +44,90 @@ export default {
 <template>
     <HelloWorld />
     <!-- navbar -->
-    <div class="text-center bg-container d-flex py-3 container-fluid">
+    <div class="text-center bg-container d-flex py-3 container-fluid bg-black">
         <div class="col-4">
             <img src="https://image.tmdb.org/t/p/w342/wwemzKWzjKYJFfCeiB57q3r4Bcm.png">
         </div>
 
-        <div class="col-4 pt-5">
-            <a class="px-2 text-decoration-none text-black" href="#">FILM</a>
-            <a class="px-2 text-decoration-none text-black" href="#">FILM</a>
-            <a class="px-2 text-decoration-none text-black" href="#">FILM</a>
-            <a class="px-2 text-decoration-none text-black" href="#">FILM</a>
+
+        <div class="col-4 pt-5 ps-5">
+            <ul class="nav nav-underline">
+                <li class="nav-item">
+                    <a class="nav-link text-white active" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">TV Shows</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" >Trending</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" >My list</a>
+                </li>
+            </ul>
+
         </div>
 
         <div class="col-4 pt-4">
-            <input class="mx-2" type="search" placeholder="Cerca il tuo film..." v-model="movieSearch"
+            <input class="mx-2 rounded" type="search" placeholder="Cerca il tuo film..." v-model="movieSearch"
                 @keyup.enter="searchResult()">
-            <button type="submit" @click="searchResult()">Cerca</button>
+            <button type="submit" @click="searchResult()" class="rounded bg-danger">Cerca</button>
         </div>
     </div>
 
 
 
     <!--MAIN-->
-    <main class="bg-container">
-    <div class="container mt-4">
-        <div class="row g-4">
-            <div class="col-md-4" v-for="movie in store.movies">
-                <div class="card movie-card">
-                    
-                    <div class="card-image rounded" :style="'background-image: url(https://image.tmdb.org/t/p/w342' + movie.poster_path + ')'"></div>
-                    <ul class="list-group">
-                        <li class="list-group-item bg-color-card" v-if="movie.media_type != 'person'">
-                            <div v-if="movie.media_type == 'movie'">TITOLO: {{ movie.title }}</div>
-                            <div v-if="movie.media_type == 'tv'">TITOLO: {{ movie.name }}</div>
-                            <div>TITOLO ORIGINALE: {{ movie.original_title ?? movie.original_name }}</div>
-                            <div>LINGUA:
-                                <img :src="languageFlags[movie.original_language]" alt="Flag" v-if="languageFlags[movie.original_language]">
-                                <span v-else>Lingua sconosciuta</span>
-                            </div>
-                            <div>TRAMA: {{ movie.overview }}</div>
-                            <div>VOTO:</div>
-                            <div class="mb-2">
-                                <span v-for="star in 5">
-                                    <i :class="['fa', 'fa-star', 'text-warning', star <= Math.ceil(movie.vote_average / 2) ? 'fa-solid' : 'fa-regular']"></i>
-                                </span>
-                                
-                            </div>
-                        </li>
-                    </ul>
+    <main class="bg-container bg-dark-subtle">
+        <div class="container mt-4">
+            <div class="row g-4">
+                <div class="col-md-4" v-for="movie in store.movies">
+                    <div class="card movie-card">
+
+                        <div class="card-image rounded"
+                            :style="'background-image: url(https://image.tmdb.org/t/p/w342' + movie.poster_path + ')'">
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item bg-color-card" v-if="movie.media_type != 'person'">
+                                <div v-if="movie.media_type == 'movie'">TITOLO: {{ movie.title }}</div>
+                                <div v-if="movie.media_type == 'tv'">TITOLO: {{ movie.name }}</div>
+                                <div>TITOLO ORIGINALE: {{ movie.original_title ?? movie.original_name }}</div>
+                                <div>LINGUA:
+                                    <img :src="languageFlags[movie.original_language]" alt="Flag"
+                                        v-if="languageFlags[movie.original_language]">
+                                    <span v-else>Lingua sconosciuta</span>
+                                </div>
+                                <div>TRAMA: {{ movie.overview }}</div>
+                                <div>VOTO:</div>
+                                <div class="mb-2">
+                                    <span v-for="star in 5">
+                                        <i
+                                            :class="['fa', 'fa-star', 'text-warning', star <= Math.ceil(movie.vote_average / 2) ? 'fa-solid' : 'fa-regular']"></i>
+                                    </span>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
-
-
+    </main>
 </template>
 
-<style scoped>
-.bg-color-card {
-    background-color: rgb(199, 138, 94);
+ <!-- aggiungere scoped dopo -->
+<style>
+/* .bg-color-card {
+    background-color: rgb(3, 3, 3);
 }
 
 .bg-container {
     background-color: rgb(255, 245, 225);
     ;
-}
+} */
 
 .card.movie-card .card-image {
     width: 100%;
