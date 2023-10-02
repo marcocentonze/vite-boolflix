@@ -12,7 +12,7 @@ export default {
                 it: 'https://flagsapi.com/IT/flat/16.png',
                 fr: 'https://flagsapi.com/FR/flat/16.png',
                 de: 'https://flagsapi.com/DE/flat/16.png',
-                en: 'https://flagsapi.com/EN/flat/16.png',
+                en: 'https://flagsapi.com/GB/flat/16.png',
 
             },
         }
@@ -90,23 +90,26 @@ export default {
                         <div class="card-image rounded"
                             :style="'background-image: url(https://image.tmdb.org/t/p/w342' + movie.poster_path + ')'">
                         </div>
-                        <ul class="list-group">
+                        <ul class="list-group list-unstyled">
                             <li class="list-group-item bg-color-card" v-if="movie.media_type != 'person'">
-                                <div v-if="movie.media_type == 'movie'">TITOLO: {{ movie.title }}</div>
-                                <div v-if="movie.media_type == 'tv'">TITOLO: {{ movie.name }}</div>
-                                <div>TITOLO ORIGINALE: {{ movie.original_title ?? movie.original_name }}</div>
-                                <div>LINGUA:
+                                <li v-if="movie.media_type == 'movie'"><strong>TITOLO:</strong> {{ movie.title }}</li>
+                                <li v-if="movie.media_type == 'tv'"><strong>TITOLO:</strong> {{ movie.name }}</li>
+                                <li><strong>TITOLO ORIGINALE:</strong> {{ movie.original_title ?? movie.original_name }}</li>
+                                <div>
+                                    <li><strong>LINGUA:</strong>
                                     <img :src="languageFlags[movie.original_language]" alt="Flag"
                                         v-if="languageFlags[movie.original_language]">
                                     <span v-else>Lingua sconosciuta</span>
+                                </li>
                                 </div>
-                                <div>TRAMA: {{ movie.overview }}</div>
-                                <div>VOTO:</div>
-                                <div class="mb-2">
+                                <li><strong>TRAMA:</strong> {{ movie.overview }}</li>
+                                <div>
+                                    <li><strong>VOTO:</strong>
                                     <span v-for="star in 5">
                                         <i
                                             :class="['fa', 'fa-star', 'text-warning', star <= Math.ceil(movie.vote_average / 2) ? 'fa-solid' : 'fa-regular']"></i>
                                     </span>
+                                </li>
 
                                 </div>
                             </li>
@@ -128,7 +131,9 @@ export default {
     background-color: rgb(255, 245, 225);
     ;
 } */
-
+.bg-container{
+    font-family: 'Tillana', cursive;
+}
 .card.movie-card .card-image {
     width: 100%;
     height: 500px;
